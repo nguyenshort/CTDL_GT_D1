@@ -1,0 +1,16 @@
+Câu 1:
+Nêu khái niệm đệ quy, giải thuật đệ quy (1 điểm)
+Cho ví dụ về một giải thuật đệ quy (1 điểm)
+Ghi output của ví dụ đệ quy vừa tạo (1 điểm)
+Bài Làm:
+Khái niệm đệ quy: Ta nói một đối tượng là đệ quy nếu nó được định nghĩa qua chính nó hoặc một đối tượng khác cùng dạng với chính nó bằng quy nạp.
+Giải thuật đệ quy: Nếu lời giải của một bài toán P được thực hiện bằng lời giải của bài toán P' có dạng giống như P thì đó là một lời giải đệ quy. Giải thuật tương ứng với lời giải như vậy gọi là giải thuật đệ quy.
+Ví dụ thuật toán đệ quy
+Tính tổng
+public static int sum(int n) {
+        if (n >= 1) {
+            return sum(n - 1) + n;
+        }
+        return n;
+    }
+output nếu n = 5 => 15

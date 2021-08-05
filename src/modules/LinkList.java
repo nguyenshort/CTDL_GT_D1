@@ -3,29 +3,36 @@ package modules;
 import java.util.Objects;
 
 public class LinkList {
-    Node _head;
+    Node _head, _tail;
 
-    public LinkList() {
-        this._head = null;
-    }
-    public LinkList(Node _head) {
-        this._head = _head;
+    public Node getHead() {
+        return this._head;
     }
 
-    public void clear() {
-        this._head = null;
-    }
 
     public boolean isEmpty() {
         return this._head == null;
     }
 
-    /**
-     * Khi thêm node mới vào đầu phần tử đầu sẽ trở thành phần tử thứ 2
-     * Phần tử vừa thêm vào sẽ trở thành head và chứa next tới phần tử trước đó
-     */
-    public void unshift(Animal animal) {
-        this._head = new Node(animal, this._head);
+
+    public void unshift(TikTok tiktok) {
+        if (this.isEmpty()) {
+           this._head = this._tail = new Node(tiktok);
+           return;
+        }
+        this._head = new Node(tiktok, this._head);
+        this._head.next.setPrev(this._head);
+    }
+
+    public void push(TikTok tiktok) {
+        if (this.isEmpty()) {
+            this._head = this._tail = new Node(tiktok, this._head);
+            return;
+        }
+        Node newNode = new Node(tiktok);
+        this._tail.setNext(newNode);
+        newNode.setPrev(this._tail);
+        this._tail = newNode;
     }
 
     /**
@@ -53,34 +60,22 @@ public class LinkList {
         return true;
     }
 
-    public Node reverse() {
+    public void reverse() {
         if (this.isEmpty() || this._head == null) {
-            return this._head;
+            System.out.println("Linklist is empty");
         }
-        Node temp = null;
-        temp = this._reverse(this._head, temp);
-        return temp;
-    }
-
-    /**
-     * Đảo ngược Link List ở đây là tạo 1 Node trống
-     * Sử dụng đệ quy để duyệt toàn bộ link list
-     * Sau đó push vào node đã tạo ở trên
-     */
-    private Node _reverse(Node star, Node temp) {
-        if (star != null) {
-            temp = new Node(star.getValue(), temp);
-            return this._reverse(star.next, temp);
+        Node node = this._tail;
+        while (node != null) {
+            System.out.println(node.getValue().toString());
+            node = node.prev;
         }
-        return temp;
     }
 
     public void display() {
         Node poit = this._head;
-        while (poit.next != null) {
+        while (poit != null) {
             System.out.println(poit.getValue().toString());
             poit = poit.next;
         }
-        System.out.println(poit.getValue().toString());
     }
 }
